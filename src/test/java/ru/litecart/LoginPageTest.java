@@ -1,4 +1,4 @@
-package ru.stqa.training.selenium;
+package ru.litecart;
 
 import org.junit.After;
 import org.junit.Before;
@@ -8,7 +8,7 @@ import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class MyFirstTest {
+public class LoginPageTest {
     private WebDriver driver;
     private WebDriverWait wait;
 
@@ -20,9 +20,10 @@ public class MyFirstTest {
 
     @Test
     public void myFirstTest() {
-        driver.get("http://www.google.com");
-        driver.findElement(By.name("q")).sendKeys("web driver \n");
-
+        driver.get("http://localhost/litecart/admin/login.php?redirect_url=%2Flitecart%2Fadmin%2F");
+        driver.findElement(By.name("username")).sendKeys("admin");
+        driver.findElement(By.name("password")).sendKeys("admin");
+        driver.findElement(By.name("login")).click();
     }
 
     @After
