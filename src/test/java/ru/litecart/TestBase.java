@@ -1,19 +1,18 @@
-package ru.stqa.training.selenium;
+package ru.litecart;
 
 import org.junit.After;
 import org.junit.Before;
-import org.junit.Test;
 import org.openqa.selenium.By;
 import org.openqa.selenium.HasCapabilities;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.chrome.ChromeDriver;
 import org.openqa.selenium.chrome.ChromeOptions;
 import org.openqa.selenium.remote.DesiredCapabilities;
-//import org.openqa.selenium.support.ui.WebDriverWait;
+import org.openqa.selenium.support.ui.WebDriverWait;
 
-public class MyFirstTest {
-    private WebDriver driver;
-    //private WebDriverWait wait;
+public class TestBase {
+    public WebDriver driver;
+    public WebDriverWait wait;
 
     @Before
     public void start() {
@@ -23,19 +22,17 @@ public class MyFirstTest {
         caps.setCapability(ChromeOptions.CAPABILITY, options);
         driver = new ChromeDriver(caps);
         System.out.println(((HasCapabilities)driver).getCapabilities());
-        //wait = new WebDriverWait(driver, 10);
-    }
-
-    @Test
-    public void myFirstTest() {
-        driver.get("http://www.google.com");
-        driver.findElement(By.name("q")).sendKeys("web driver \n");
-
+        wait = new WebDriverWait(driver, 10);
     }
 
     @After
     public void stop() {
         driver.quit();
         driver = null;
+    }
+
+    boolean isElementPresent(WebDriver driver, By locator) {
+        driver.findElement(locator);
+        return true;
     }
 }
