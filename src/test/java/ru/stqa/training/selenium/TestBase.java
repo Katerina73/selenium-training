@@ -1,4 +1,4 @@
-package ru.litecart;
+package ru.stqa.training.selenium;
 
 import org.junit.After;
 import org.junit.Before;
@@ -31,7 +31,7 @@ public class TestBase {
         driver = null;
     }
 
-    boolean isElementPresent(WebDriver driver, By locator) {
+    public boolean isElementPresent(WebDriver driver, By locator) {
         driver.findElement(locator);
         return true;
     }

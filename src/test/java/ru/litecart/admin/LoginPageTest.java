@@ -1,7 +1,8 @@
 
-package ru.litecart;
+package ru.litecart.admin;
 import org.junit.Test;
 import org.openqa.selenium.By;
+import ru.stqa.training.selenium.TestBase;
 
 public class LoginPageTest extends TestBase {
 
