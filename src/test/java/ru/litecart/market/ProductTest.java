@@ -1,4 +1,4 @@
-package ru.litecart.admin;
+package ru.litecart.market;
 
 import org.junit.Assert;
 import ru.stqa.training.selenium.TestBase;

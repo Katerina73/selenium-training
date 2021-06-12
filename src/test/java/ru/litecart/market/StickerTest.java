@@ -12,8 +12,8 @@ public class StickerTest extends TestBase {
     @Test
     public void StickerTest () {
         driver.get("http://localhost/litecart");
-        List<WebElement> ducks = driver.findElements(By.xpath("//li[@class=\"product column shadow hover-light\"]"));
-        WebElement duck = driver.findElement(By.xpath("//li[@class=\"product column shadow hover-light\"]"));
+        List<WebElement> ducks = driver.findElements(By.xpath("//li[contains(@class, 'product')]"));
+        WebElement duck = driver.findElement(By.xpath("//li[contains(@class, 'product')]"));
 
         for (int i=0; i< ducks.size(); i++) {
             int amountOfDucks = duck.findElements(By.xpath(".//div[contains(@class, \"sticker\")]")).size();
