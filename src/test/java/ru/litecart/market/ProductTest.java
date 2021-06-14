@@ -9,6 +9,8 @@ import java.util.Arrays;
 public class ProductTest extends TestBase {
 
     //на главной странице и на странице товара совпадает текст названия товара
+
+
     @Test
     public void ProductNameTest () {
         driver.get("http://localhost/litecart/");
@@ -82,6 +84,7 @@ public class ProductTest extends TestBase {
         */
 
         //определение того, что шрифт зачёркнутый
+
         boolean lineThrough = Arrays.asList(textStyle).contains("line-through");
         Assert.assertTrue((gray = true) && (lineThrough = true));
     }
@@ -106,6 +109,7 @@ public class ProductTest extends TestBase {
         */
 
         //сравнение значений R, G и B
+
         boolean gray = ((rGB[1] == rGB[2]) && (rGB[2] == rGB[3]));
         Assert.assertTrue(gray = true);
 
@@ -124,6 +128,7 @@ public class ProductTest extends TestBase {
         */
 
         //определение того, что шрифт зачёркнутый
+
         boolean lineThrough = Arrays.asList(textStyle).contains("line-through");
         Assert.assertTrue(lineThrough = true);
     }
@@ -152,6 +157,7 @@ public class ProductTest extends TestBase {
         Assert.assertTrue((red = true) && (bold = true));
          */
 
+
     }
 
     //акционная жирная и красная на странице товара
@@ -167,7 +173,6 @@ public class ProductTest extends TestBase {
 
         //получение типа форматирования текста акционной цены
         //сценарий для Chrome и FireFox, где font-weight выражается в числовом значении
-
         int сampaignPriceTextStyle = Integer.parseInt(driver.findElement(By.xpath("//div[@id = \"box-product\"]//strong[@itemprop=\"price\"]")).getCssValue("font-weight"));
         boolean bold = (сampaignPriceTextStyle >= 700);
         Assert.assertTrue((red = true) && (bold = true));
@@ -181,18 +186,34 @@ public class ProductTest extends TestBase {
 
     }
 
+
     //акционная цена крупнее, чем обычная
     @Test
     public void CampaignPriceIsBigger () {
         driver.get("http://localhost/litecart/");
         String regularPriceMainPage = driver.findElement(By.xpath("//div[@id =\"box-campaigns\"]//s")).getCssValue("font-size").toString();
+        String[] fsRegularMP = regularPriceMainPage.split("px");
+        double regularMP = Double.parseDouble(fsRegularMP[0]);
+        //System.out.println(regularMP);
+
+
         String campaignPriceMainPage = driver.findElement(By.xpath("//div[@id = \"box-campaigns\"]//div/strong\n")).getCssValue("font-size").toString();
-        Assert.assertTrue((campaignPriceMainPage.compareTo(regularPriceMainPage)) > 0 );
+        String[] fsCampaignMP = campaignPriceMainPage.split("px");
+        double campaignMP = Double.parseDouble(fsCampaignMP[0]);
+        //System.out.println(campaignMP);
+
+        Assert.assertTrue(campaignMP > regularMP);
 
         driver.findElement(By.xpath("//div[@id = \"box-campaigns\"]//s/ancestor::a")).click();
         String regularPriceProductPage = driver.findElement(By.xpath("//div[@id = \"box-product\"]//s")).getCssValue("font-size").toString();
-        String сampaignPriceProductPage = driver.findElement(By.xpath("//div[@id = \"box-product\"]//strong[@itemprop=\"price\"]")).getCssValue("font-size").toString();
-        Assert.assertTrue((сampaignPriceProductPage.compareTo(regularPriceProductPage)) > 0 );
+        String[] fsRegularPP = regularPriceProductPage.split("px");
+        double regularPP = Double.parseDouble(fsRegularPP[0]);
+        //System.out.println(regularPP);
 
+        String сampaignPriceProductPage = driver.findElement(By.xpath("//div[@id = \"box-product\"]//strong[@itemprop=\"price\"]")).getCssValue("font-size").toString();
+        String[] fsCampaignPP = campaignPriceMainPage.split("px");
+        double campaignPP = Double.parseDouble(fsCampaignPP[0]);
+        //System.out.println(campaignPP);
+        Assert.assertTrue(campaignPP > regularPP );
     }
 }
